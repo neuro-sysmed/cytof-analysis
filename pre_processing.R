@@ -1,18 +1,29 @@
-# Libraries
-library(CATALYST)
-#BiocManager::install("CATALYST")
-library(flowCore)
-#BiocManager::install("flowCore")
-library(stringi)
-#install.packages("stringi")
-library(cowplot)
-#install.packages("cowplot")
-library(devtools)
-#install.packages("devtools")
-library(premessa)
-#install_github("ParkerICI/premessa")
-library(readr)
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+library(BiocManager)
 
+
+
+if (!require("devtools", quietly = TRUE))
+   install.packages("devtools")
+library(devtools)
+
+
+if (!require("CATALYST", quietly = TRUE))
+    install_github("neuro-sysmed/CATALYST")
+library(CATALYST)
+
+if (!require("flowCore", quietly = TRUE))
+   BiocManager::install("flowCore")
+library(flowCore)
+
+if (!require("stringi", quietly = TRUE))
+   install.packages("stringi")
+library(stringi)
+
+if (!require("readr", quietly = TRUE))
+   install.packages("readr")
+library(readr)
 
 
 # Make a new Project in R somewhere on your computer that you can easily get to; documents. 
