@@ -50,8 +50,9 @@ def main():
 
         for i in range(len(data)):
 #                pp.pprint( data.iloc[i])
-            print(data.iloc[i,0], data.columns[30], data.iloc[i,30]) 
-            print( dict(data.iloc[i] ))
+ #           print(data.iloc[i,0], data.columns[30], data.iloc[i,30]) 
+            row_dict = dict(data.iloc[i] )
+            print( row_dict['Time'], row_dict['Pt195Di'] )
             #for t in data:
             #    print(str(t))
             
