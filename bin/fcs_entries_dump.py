@@ -44,15 +44,20 @@ def main():
             continue
         
         meta, data = fcsparser.parse(filename, meta_data_only=False)
-        if args.time_points:
-            print(data)
 
-            for t in data:
-                print(t[1])
+
+
+
+        for i in range(len(data)):
+#                pp.pprint( data.iloc[i])
+            print(data.iloc[i,0], data.columns[30], data.iloc[i,30]) 
+            print( dict(data.iloc[i] ))
+            #for t in data:
+            #    print(str(t))
             
         entries = len(data)
         total_entries += entries
-#        print( f"{filename}: {entries}" )
+        print( f"{filename}: {entries}" )
 
     print(f"Total: {total_entries}")
 

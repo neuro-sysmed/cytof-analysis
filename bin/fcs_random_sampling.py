@@ -42,17 +42,17 @@ def main():
         if os.path.isdir( filename ):
             continue
 
-        sce = fk.Sample(filename)
+        sce = fk.Sample(filename, cache_original_events=True)
 #       print(sce)
         sce.subsample_events(args.number, random_seed)
         print(sce)
 
         outfile_name = args.outfile_pattern.format(sample='t/test', number=args.number )
-        sce.export( outfile_name, source='raw', subsample=True)
+        sce.export( outfile_name, source='orig', subsample=True)
 
 #        print(f'Number of events: {list(sce.get_events())}')
 
-
+        print( sce.get_events(source='raw') )
 
     sys.exit()
 
