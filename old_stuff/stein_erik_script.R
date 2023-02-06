@@ -79,7 +79,7 @@ key <- read.csv2('Bckey.csv', # Read debarcoding key
 
 key # We need integer data here. 
 
-sce <- assignPrelim(sce, key) # Does preliminry debaroding 
+sce <- assignPrelim(sce, key) # Does preliminary debarcoding 
 rownames(sce)[rowData(sce)$is_bc]
 table(sce$bc_id)
 

@@ -2,6 +2,22 @@
 
 ## data 
 
+The data structure for the project is as follows:
+
+Input directory of original data:
+
+```data_dir = 'd:/data/runs/'```
+
+debarcoded output directories:
+
+'d:/data/debarcoded/{global,specific, all}/'
+
+In each debarcoded directory there will be the following structure:
+
+logs/
+fcs/
+
+
 
 
 ## removal of empty channels 

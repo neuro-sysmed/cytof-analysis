@@ -1,29 +1,3 @@
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-library(BiocManager)
-
-
-
-if (!require("devtools", quietly = TRUE))
-   install.packages("devtools")
-library(devtools)
-
-
-if (!require("CATALYST", quietly = TRUE))
-    install_github("neuro-sysmed/CATALYST")
-library(CATALYST)
-
-if (!require("flowCore", quietly = TRUE))
-   BiocManager::install("flowCore")
-library(flowCore)
-
-if (!require("stringi", quietly = TRUE))
-   install.packages("stringi")
-library(stringi)
-
-if (!require("readr", quietly = TRUE))
-   install.packages("readr")
-library(readr)
 
 
 # Make a new Project in R somewhere on your computer that you can easily get to; documents. 
@@ -35,6 +9,7 @@ library(readr)
 
 # Find data
 ###########
+data_dir <- 'd:/data/'
 data_dir <- 'data' 
 files <- list.files(path = data_dir,full.names = TRUE, pattern = ".fcs")
 files # Check that you have some file paths
@@ -46,8 +21,6 @@ double_delims = stri_detect_fixed(unlist(ff@description), "\\\\") #check the who
 if (any(double_delims)) { 
    print("One or more double-delimter:")
    ff@description[ double_delims]  
-   # If you have, use the code below. I the code below I had double delims at ff@description$FolderName
-
   edited_dir = paste("data", "fixed_header",  sep="/")
    
   dir.create( edited_dir, recursive = TRUE)
