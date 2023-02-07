@@ -83,7 +83,6 @@ save_debarcoded_fcs_files <- function( sce, file_fstring ) {
 }
 
 
-
 plot_dna_scatter <- function( sce, outfile) {
     chs <- c("193Ir", "191Ir")
     jpeg(outfile)
@@ -100,11 +99,18 @@ stop_quietly <- function() {
 }
 
 
-subsample_fcs <- function(sce, max_events=5500) {
-   dsFilter <- sampleFilter(size = max_events, filterId="dsFilter")
-   result <- filter(sce, dsFilter)
-   sce_filtered <- Subset(sce, result)
+subsample_fcs <- function(fsc_file, max_events=5500, random_seed=10) {
+    sce <- flowCore::read.FCS(fsc_file)
+    set.seed(random_seed)
 
-   return( sce_filtered )
+    picked = sample(seq_len(nrow(sce)),size = max_events)
+
+    sce_picked <- sce[ picked,]
+
+    return(sce_picked)
 }
 
+
+write_fcs_file <- function(sce, filename) {
+    write.FCS(sce, filename)
+}

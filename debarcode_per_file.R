@@ -30,20 +30,34 @@ for (folder in list.dirs(runs_dir, recursive = FALSE)) {
     plot_dna_scatter(sce, paste(log_dir, "DNA_scatter.jpg", sep='/'))
 
     sce_specific <- applyCutoffs(sce)
-    sce_global   <- applyCutoffs(sce, sep_cutoffs = mean(cutoffs))
-    sce_all      <- applyCutoffs(sce, sep_cutoffs = 0)
 
-    seps <- data.frame (cutoff    = c(specific = -1,
-                                      global   = mean(cutoffs),
-                                      all      = 0),
-                        yield     = c(specific = mean(sce_specific$bc_id != 0),
-                                      global   = mean(sce_global$bc_id != 0),
-                                      all      = mean(sce_all$bc_id != 0))
+    seps <- data.frame (cutoff    = c(specific = -1),
+                        yield     = c(specific = mean(sce_specific$bc_id != 0))
                     )
+
+    save_debarcoded_fcs_files(sce_specific, paste(fcs_dir, "/%s_specific.fcs", sep="/"))
+    rm( sce_specific)
+
+    sce_global   <- applyCutoffs(sce, sep_cutoffs = mean(cutoffs))
+    seps <- rbind( seps, global=c(mean(cutoffs), mean(sce_global$bc_id != 0)))
+    save_debarcoded_fcs_files(sce_global, paste(fcs_dir, "/%s_global.fcs", sep="/"))
+    rm( sce_global)
+
+    sce_all      <- applyCutoffs(sce, sep_cutoffs = 0)
+    seps <- rbind( seps, all=c(0, mean(sce_all$bc_id != 0)))
+    save_debarcoded_fcs_files(sce_all, paste(fcs_dir, "/%s_all.fcs", sep="/"))
+    rm( sce_all )
+
+#    seps <- data.frame (cutoff    = c(specific = -1,
+#                                      global   = mean(cutoffs),
+#                                      all      = 0),
+#                        yield     = c(specific = mean(sce_specific$bc_id != 0),
+#                                      global   = mean(sce_global$bc_id != 0),
+#                                      all      = mean(sce_all$bc_id != 0))
+#                    )
 
     write.table(seps, paste(log_dir, "barcode_separation.csv", sep="/"), sep="\t", col.names = NA, row.names = TRUE)
 
-    save_debarcoded_fcs_files(sce, paste(fcs_dir, "/%s_specific.fcs", sep="/"))
 }
 
 
