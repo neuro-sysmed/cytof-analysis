@@ -20,7 +20,7 @@ for (file in list.files(data_dir, recursive = T, pattern=file_pattern)) {
 
     outfile = sprintf("%s/%s", output_dir, basename(file))
 
-    cat( "Subsampling from:", file, "to", outfile, "\n")
+    cat("Subsampling from:", file, "to", outfile, "\n")
 
     sce_sub <- subsample_fcs(file)
     write_fcs_file(sce_sub, outfile)

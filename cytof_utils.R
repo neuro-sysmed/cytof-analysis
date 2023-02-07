@@ -103,7 +103,8 @@ subsample_fcs <- function(fsc_file, max_events=5500, random_seed=10) {
     sce <- flowCore::read.FCS(fsc_file)
     set.seed(random_seed)
 
-    picked = sample(seq_len(nrow(sce)),size = max_events)
+    # If there is less than max_events, select all
+    picked = sample(seq_len(nrow(sce)),size = min(nrow(sce), max_events))
 
     sce_picked <- sce[ picked,]
 

@@ -51,7 +51,7 @@ def main():
             
         entries = len(data)
         total_entries += entries
-#        print( f"{filename}: {entries}" )
+        print( f"{filename}: {entries}" )
 
     print(f"Total: {total_entries}")
 
