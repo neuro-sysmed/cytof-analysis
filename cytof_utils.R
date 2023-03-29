@@ -10,7 +10,7 @@ load_libraries <- function(force_install=FALSE) {
     library(devtools, quietly = TRUE)
 
     if (force_install || !require("CATALYST", quietly = TRUE))
-        install_github("neuro-sysmed/CATALYST", force=force_install)
+        install_github("neuro-sysmed/CATALYST", force=T)
     suppressPackageStartupMessages(library(CATALYST, quietly = TRUE))
 
     if (force_install || !require("flowCore", quietly = TRUE))
@@ -39,7 +39,7 @@ mk_outdirs <- function(output_dir ) {
 
 }
 
-read_fcs_and_est_cutoffs <- function(directory) {
+read_fcs_and_est_cutoffs <- function( directory ) {
 
     sce <- prepData( directory )
     sce <- assignPrelim(sce, sample_key)
@@ -54,7 +54,6 @@ read_fcs_and_est_cutoffs <- function(directory) {
 
     # should be stored for later as well!
     cutoffs <- metadata(sce)$sep_cutoffs
-    #cat( cutoffs )
     write.table(table(sce$bc_id), paste(log_dir, "barcode_counts.csv", sep="/"), sep="\t", col.names = NA, row.names = TRUE)
     write.table(cutoffs, paste(log_dir, "barcode_cutoffs.csv", sep="/"), sep="\t", col.names = NA, row.names = TRUE)
 
