@@ -5,20 +5,30 @@ source('cytof_utils.R')
 
 
 data_dir <- 'data/debarcoded/'
-file_pattern <- 'all.fcs' 
-max_events = 5500
 
+file_pattern <- '.fcs' 
+max_events <- 5500
 
+subsample_dir <- sprintf("%s/subsampled_%d", data_dir, max_events)
 
 
 for (file in list.files(data_dir, recursive = T, pattern=file_pattern)) {
-    file = sprintf("%s/%s", data_dir, file)
+    run_dir <- dirname(file)
 
-    output_dir = sprintf("%s/subsampled_%d/", dirname(dirname(file)), max_events)
+    file <- sprintf("%s/%s", data_dir, file)
+#    cat(sprintf("%s\n", basename(file)))
+    output_dir <- sprintf("%s/%s", subsample_dir, run_dir)
+#    cat(output_dir)
+    outfile = sprintf("%s/%s", output_dir, basename(file))
+#    cat(outfile)
+#    break
+
+
+
+
     dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 
 
-    outfile = sprintf("%s/%s", output_dir, basename(file))
 
     cat("Subsampling from:", file, "to", outfile, "\n")
 
