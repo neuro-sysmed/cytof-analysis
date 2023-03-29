@@ -5,14 +5,23 @@ load_libraries(F)
 
 
 runs_dir <- commandArgs(trailingOnly = TRUE)
-runs_dir <- "d:/data/analysis/fcs"
-runs_dir <- "data/runs"
+#runs_dir <- "d:/data/analysis/fcs"
+#runs_dir <- "data/runs"
 
 base_dir <- dirname(runs_dir)
 
 for (folder in list.dirs(runs_dir, recursive = FALSE)) {
 
+
+
     run_name <- basename( folder )
+
+# To skip folders...
+#    if (run_name  == 'barcode_1') {
+#        next
+#    }
+
+
     output_dir <- sprintf("%s/debarcoded/%s/", base_dir, run_name)
     cat( sprintf("Processing folder %s --> run-name %s\n", folder, run_name) )
     cat( sprintf("Storing debarcoded files in %s\n", output_dir) )
