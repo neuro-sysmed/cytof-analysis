@@ -32,7 +32,7 @@ for (file in list.files(data_dir, recursive = T, pattern=file_pattern)) {
 
     cat("Subsampling from:", file, "to", outfile, "\n")
 
-    sce_sub <- subsample_fcs(file)
+    sce_sub <- subsample_fcs(file, max_events = max_events)
     write_fcs_file(sce_sub, outfile)
 
 }
